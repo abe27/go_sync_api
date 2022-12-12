@@ -55,7 +55,7 @@ func FetchAll() (*models.ResponseOrder, error) {
 
 func CreateIssueEnt(data *[]models.Order) (bool, error) {
 	fmt.Println(configs.ORAC_DNS)
-	db, err := sql.Open("goracle", configs.ORAC_DNS)
+	db, err := sql.Open("goracle", configs.ORAC_USER+"/"+configs.ORAC_PASSWORD+"@"+configs.ORAC_HOST+"/"+configs.ORAC_SERVICE)
 	if err != nil {
 		return false, err
 	}

@@ -2,6 +2,10 @@ package models
 
 import "time"
 
+type ResponseOrder struct {
+	Data []Order `json:"data"`
+}
+
 type User struct {
 	ID        string    `gorm:"primaryKey;size:21;" json:"id,omitempty"`
 	UserName  string    `gorm:"not null;column:username;index;unique;size:10" json:"user_name,omitempty" form:"user_name"`

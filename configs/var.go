@@ -9,5 +9,5 @@ var (
 	ORAC_USER     string
 	ORAC_PASSWORD string
 	ORAC_DNS      string
-	// ORAC_STORE          *gorm.DB
+	API_HOST      string
 )

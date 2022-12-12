@@ -7,7 +7,6 @@ import (
 
 	"github.com/abe27/syncapi/configs"
 	"github.com/abe27/syncapi/controllers"
-	_ "github.com/godror/godror"
 	"github.com/joho/godotenv"
 )
 
@@ -22,10 +21,17 @@ func init() {
 	configs.ORAC_SERVICE = os.Getenv("ORAC_SERVICE")
 	configs.ORAC_USER = os.Getenv("ORAC_USER")
 	configs.ORAC_PASSWORD = os.Getenv("ORAC_PASSWORD")
-	configs.ORAC_DNS = fmt.Sprintf(`user="%s" password="%s" connectString="%s:%d/%s"`, configs.ORAC_USER, configs.ORAC_PASSWORD, configs.ORAC_HOST, configs.ORAC_PORT, configs.ORAC_SERVICE)
+	configs.ORAC_DNS = fmt.Sprintf(`%s/%s@%s:%d/%s`, configs.ORAC_USER, configs.ORAC_PASSWORD, configs.ORAC_HOST, configs.ORAC_PORT, configs.ORAC_SERVICE)
+	configs.API_HOST = os.Getenv("API_HOST")
 }
 
 func main() {
-	fmt.Println("STEP.1 :===> FetchTest")
-	controllers.FetchTest()
+	fmt.Println("STEP.1 :===> FetchOrderAll")
+	data, err := controllers.FetchAll()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("STEP.2 :===> Create Issue Ent")
+	controllers.CreateIssueEnt(&data.Data)
 }

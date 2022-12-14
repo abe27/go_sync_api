@@ -141,6 +141,11 @@ type OrderDetail struct {
 	OrderPlan     OrderPlan `gorm:"foreignKey:OrderPlanID;references:ID" json:"orderplan"`
 }
 
+type SyncOrderPlan struct {
+	Message string      `json:"message"`
+	Data    []OrderPlan `json:"data"`
+}
+
 type OrderPlan struct {
 	ID               string        `gorm:"primaryKey;size:21;" json:"id"`
 	RowID            string        `gorm:"null;size:18" json:"row_id,omitempty" form:"row_id"`

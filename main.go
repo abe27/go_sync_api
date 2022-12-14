@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	if err := godotenv.Load(".env"); err != nil {
+	if err := godotenv.Load(".env.sync"); err != nil {
 		panic("Error loading .env file")
 	}
 

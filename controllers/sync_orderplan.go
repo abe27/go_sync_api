@@ -91,6 +91,12 @@ func GetSyncOrderPlan() {
 		if err != nil {
 			panic(err)
 		}
+
+		sqlInsertLogs := fmt.Sprintf("INSERT INTO TXP_ORDERRECORDS(FACTORY, SHIPTYPE, AFFCODE, PONO, ETDTAP, PARTNO, PARTNAME, ORDERMONTH, ORDERORGI, ORDERROUND, BALQTY, SHIPPEDFLG, SHIPPEDQTY, PC, COMMERCIAL, SAMPFLG, CARRIERCODE, ORDERTYPE, UPDDTE, ALLOCATEQTY, BIDRFL, DELETEFLG, REASONCD, BIOABT, FIRMFLG, BICOMD, BISTDP, BINEWT, BIGRWT, BISHPC, BIIVPX, BISAFN, BILENG, BIWIDT, BIHIGH, CURINV, OLDINV, SYSDTE, POUPDFLAG, CREATEDBY, MODIFIEDBY, LOTNO, ORDERSTATUS, ORDERID, STATUS, ORDSYNC)VALUES('%s', '%s', '%s', '%s', TO_DATE('%s', 'YYYY-MM-DD'), '%s', '%s', TO_DATE('%s', 'YYYY-MM-DD'), %f, %f, %f, '%s', %f, '%s', '%s', '%s', '%s', '%s', SYSDATE, %f, '%s', '%s', '%s', '%d', '%s', '%s', %f, %f, %f, '%s','%s', '%s', %f, %f, %f, null,null,SYSDATE, null,null,null, '%s', 0, '%s', 0, 0)", v.Vendor, v.Shipment.Title, v.Biac, v.Pono, v.EtdTap.Format("2006-01-02"), v.PartNo, strings.ReplaceAll(v.PartName, "'", "''"), v.Ordermonth.Format("2006-01-02"), v.Orderorgi, v.Orderround, v.BalQty, v.ShippedFlg, v.ShippedQty, v.Pc.Title, v.Commercial.Title, v.SampFlg, v.CarrierCode, v.OrderType.Title, v.AllocateQty, v.Bidrfl, v.DeleteFlg, v.Reasoncd, v.Bioabt, v.FirmFlg, v.Bicomd, v.Bistdp, v.Binewt, v.Bigrwt, v.Bishpc, v.Biivpx, v.Bisafn, v.Bileng, v.Biwidt, v.Bihigh, v.LotNo, v.ID)
+		_, err = db.Exec(sqlInsertLogs)
+		if err != nil {
+			panic(err)
+		}
 		UpdateOrderPlan(v.ID, true)
 		fmt.Printf("%d %s ORDER ID: %s\n", x, txtQuery, v.ID)
 		x++

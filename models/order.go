@@ -85,6 +85,11 @@ type OrderZone struct {
 	Whs         Whs       `gorm:"foreignKey:WhsID;references:ID" json:"whs,omitempty"`
 }
 
+type SyncOrder struct {
+	Message string  `json:"message"`
+	Data    []Order `json:"data"`
+}
+
 type Order struct {
 	ID           string         `gorm:"primaryKey;unique;index;size:21" json:"id"`
 	RowID        string         `gorm:"null;size:18" json:"row_id" form:"row_id"`

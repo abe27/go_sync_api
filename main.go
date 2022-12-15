@@ -26,13 +26,8 @@ func init() {
 }
 
 func main() {
-	// fmt.Println("STEP.1 :===> FetchOrderAll")
-	// data, err := controllers.FetchAll()
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	// fmt.Println("STEP.2 :===> Create Issue Ent")
-	// controllers.CreateIssueEnt(&data.Data)
+	fmt.Println("STEP.1 :===> Sync Order Plan")
 	controllers.GetSyncOrderPlan()
+	fmt.Println("STEP.2 :===> Sync Order")
+	controllers.SyncOrder()
 }
